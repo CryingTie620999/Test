@@ -390,11 +390,32 @@ Game.registerMod('CookiStocker',{
 
 		// Your loop bootstrap already self-defers until the Bank minigame is ready
 		this.startStocking();
-	},
+},
+save: function () {
+    try {
+        return JSON.stringify({
+            stockList: window.CookiStocker.stockList || {},
+            cfgReady: window.CookiStocker._cfgReady || false,
+            patchedMaxStock: window.CookiStocker.patchedMaxStock || false
+        });
+    } catch (e) {
+        console.log("CookiStocker save error:", e);
+        return "";
+    }
+},
 
-	save: function () {
-		return CookiStocker.save();
-	},
+load: function (str) {
+    try {
+        if (str) {
+            var data = JSON.parse(str);
+            window.CookiStocker.stockList = data.stockList || {};
+            window.CookiStocker._cfgReady = data.cfgReady || false;
+            window.CookiStocker.patchedMaxStock = data.patchedMaxStock || false;
+        }
+    } catch (e) {
+        console.log("CookiStocker load error:", e);
+    }
+},
 
 	// The game will pass the string we returned from save() back into load(str).
 	// We defer until the Bank minigame is present so CookiStocker.load can safely touch its state.
