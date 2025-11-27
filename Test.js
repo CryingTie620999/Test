@@ -7,7 +7,7 @@
 		var stockerMarketOn = true;
 
 		// Minimum number of brokers required for automatic trading
-		var stockerMinBrokers = 72				// Default of 72 results in 0.5% commission
+		var stockerMinBrokers = 2				// Default of 72 results in 0.5% commission
 
 		// Fraction of banked cookies allowed for automatic trading
 		var stockerCookiesThreshold = 0.05;
